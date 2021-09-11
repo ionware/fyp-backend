@@ -26,6 +26,8 @@ class StudentResource extends JsonResource
             'phone' => $this->when($this->phone, $this->phone),
             'session_id' => $this->session_id,
             'session' => $this->session->year,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

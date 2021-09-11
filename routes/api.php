@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiKeyController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\StudentController;
@@ -25,6 +26,9 @@ Route::prefix('v1')->group(function () {
         Route::apiResource('user', UserController::class);
 
         Route::get('/me', [UserController::class, 'profile'])->name('profile');
+
+        // API Key resource controller.
+        Route::apiResource('key', ApiKeyController::class);
     });
 
 });
