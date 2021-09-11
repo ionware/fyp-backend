@@ -45,5 +45,12 @@ class UsersTableSeeder extends Seeder
         foreach ($users as $user) {
             User::factory()->create($user);
         }
+
+        User::factory()->create([
+            'email' => 'adedeji.stephen@kwasu.edu.ng',
+            'title' => 'Dr.',
+            'firstName' => 'Adedeji',
+            'lastName' => 'Stephen',
+        ]);
     }
 }
