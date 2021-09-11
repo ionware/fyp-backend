@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
@@ -19,6 +20,11 @@ Route::prefix('v1')->group(function () {
 
         // Student resources
         Route::apiResource('student', StudentController::class);
+
+        // User resource (Lecturer & Admin module)
+        Route::apiResource('user', UserController::class);
+
+        Route::get('/me', [UserController::class, 'profile'])->name('profile');
     });
 
 });
