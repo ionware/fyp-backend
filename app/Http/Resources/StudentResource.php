@@ -15,7 +15,7 @@ class StudentResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
+            'id' => $this->when(empty($request->throttle), $this->id),
             'surname' => $this->surname,
             'firstName' => $this->firstName,
             'lastName' => $this->lastName,
@@ -24,10 +24,10 @@ class StudentResource extends JsonResource
             'email' => $this->email,
             'address' => $this->when($this->address, $this->address),
             'phone' => $this->when($this->phone, $this->phone),
-            'session_id' => $this->session_id,
+            'session_id' => $this->when(empty($request->throttle), $this->session_id),
             'session' => $this->session->year,
             'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'updated_at' => $this->when(empty($request->throttle), $this->updated_at),
         ];
     }
 }

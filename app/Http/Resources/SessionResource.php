@@ -18,10 +18,10 @@ class SessionResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
+            'id' => $this->when(empty($request->throttle), $this->id),
             'year' => $this->year,
             'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'updated_at' => $this->when(empty($request->throttle), $this->updated_at),
         ];
     }
 }
