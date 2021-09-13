@@ -3,6 +3,7 @@
 use App\Http\Controllers\ApiKeyController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\StatController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,7 @@ Route::prefix('v1')->group(function () {
 
         // Student resources
         Route::apiResource('student', StudentController::class);
+        Route::get('/students', [StudentController::class, 'all']);
 
         // User resource (Lecturer & Admin module)
         Route::apiResource('user', UserController::class);
@@ -29,6 +31,10 @@ Route::prefix('v1')->group(function () {
 
         // API Key resource controller.
         Route::apiResource('key', ApiKeyController::class);
+
+        Route::prefix('statistics')->group(function () {
+            Route::get('/', [StatController::class, 'index']);
+        });
     });
 
 });

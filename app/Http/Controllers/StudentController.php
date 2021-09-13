@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\StudentResource;
 use App\Models\Session;
 use App\Models\Student;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -27,6 +28,18 @@ class StudentController extends Controller
         }
 
         $students = $students->get();
+
+        return response()->json(['data' => StudentResource::collection($students)], Response::HTTP_OK);
+    }
+
+    /**
+     * Get all students on the database.
+     *
+     * @return JsonResponse
+     */
+    public function all(): JsonResponse
+    {
+        $students =  Student::latest()->get();
 
         return response()->json(['data' => StudentResource::collection($students)], Response::HTTP_OK);
     }
