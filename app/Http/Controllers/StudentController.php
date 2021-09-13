@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\StudentResource;
+use App\Models\Session;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,6 +21,9 @@ class StudentController extends Controller
         $students =  Student::latest();
         if ($request->query('session')) {
             $students = $students->where('session_id', $request->query('session'));
+        } else {
+            $latest_session_id = Session::latest()->first();
+            $students = $students->where('session_id', $latest_session_id);
         }
 
         $students = $students->get();

@@ -49,7 +49,7 @@ class UserController extends Controller
         $data['password'] = Hash::make($data['password']);
         $user = User::create($data);
 
-        return response()->json(['data' => new UserResource($user)], Response::HTTP_OK);
+        return response()->json(['data' => new UserResource($user)], Response::HTTP_CREATED);
     }
 
     /**
