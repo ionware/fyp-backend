@@ -22,7 +22,7 @@ class StudentController extends Controller
         if ($request->query('session')) {
             $students = $students->where('session_id', $request->query('session'));
         } else {
-            $latest_session_id = Session::latest()->first();
+            $latest_session_id = Session::latest()->first()->id;
             $students = $students->where('session_id', $latest_session_id);
         }
 
