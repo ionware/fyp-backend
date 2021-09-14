@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ApiKeyController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\StatController;
 use App\Http\Controllers\StudentController;
@@ -17,6 +18,9 @@ Route::prefix('v1')->group(function () {
     });
 
     Route::middleware('auth:sanctum')->group(function () {
+        // Search controller
+        Route::get('/search', [SearchController::class, 'index']);
+
         // Session resource
         Route::apiResource('session', SessionController::class);
 
