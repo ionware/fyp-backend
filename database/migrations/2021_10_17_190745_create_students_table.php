@@ -23,6 +23,7 @@ class CreateStudentsTable extends Migration
             $table->string('matricNo')->unique();
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
+            $table->foreignId('department_id')->constrained('departments')->onDelete('cascade');
             $table->foreignId('session_id')->constrained('sessions');
             $table->timestamps();
         });

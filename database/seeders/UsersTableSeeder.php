@@ -21,24 +21,15 @@ class UsersTableSeeder extends Seeder
                 'lastName' => 'Babatunde',
             ],
             [
-                'title' => 'Dr.',
-                'firstName' => 'Isiaka',
-                'lastName' => 'Isiaka',
-            ],
-            [
-                'title' => 'Mr.',
-                'firstName' => 'Abdulsalam',
-                'lastName' => 'Abdulsalam',
-            ],
-            [
-                'title' => 'Dr.',
-                'firstName' => 'Babatunde',
-                'lastName' => 'Babatunde',
-            ],
-            [
                 'title' => 'Dr. Mrs.',
                 'firstName' => 'Folashade',
                 'lastName' => 'Ajao',
+            ],
+            [
+                'title' => 'Mr.',
+                'firstName' => 'Akeem',
+                'lastName' => 'Kadri',
+                'email' => 'akeem.kadri@kwasu.edu.ng',
             ],
         ];
 
@@ -48,7 +39,7 @@ class UsersTableSeeder extends Seeder
 
         User::factory()->create([
             'email' => 'adedeji.stephen@kwasu.edu.ng',
-            'title' => 'Dr.',
+            'title' => 'Mr.',
             'firstName' => 'Adedeji',
             'lastName' => 'Stephen',
         ]);

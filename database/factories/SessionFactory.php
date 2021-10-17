@@ -2,9 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\Department;
 use App\Models\Session;
 use App\Models\Student;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class SessionFactory extends Factory
 {
@@ -30,14 +32,19 @@ class SessionFactory extends Factory
     public function configure()
     {
         return $this->afterCreating(function($session) {
-            $year = substr(explode('/', $session->year)[0], 2);
-            $limit = mt_rand(20, 45);
+            $departments = Department::pluck('id')->toArray();
 
-            for ($i = 1; $i < $limit; $i++) {
-                // Create student account.
-                $session->students()->create(Student::factory()->make([
-                    'matricNo' => sprintf('%s/47CS/%s', $year, str_pad($i, 3, STR_PAD_LEFT, '0')),
-                ])->toArray());
+            foreach ($departments as $departmentId) {
+                $year = substr(explode('/', $session->year)[0], 2);
+                $marker = strtoupper(substr(str_shuffle(Str::random(4)), 0, 2));
+
+                for ($i = 1; $i < 8; $i++) {
+                    // Create student account.
+                    $session->students()->create(Student::factory()->make([
+                        'matricNo' => sprintf('%s/47%s/%s', $year, $marker, str_pad($i, 3, STR_PAD_LEFT, '0')),
+                        'department_id' => $departmentId,
+                    ])->toArray());
+                }
             }
         });
     }

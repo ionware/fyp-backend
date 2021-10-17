@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Student extends Model
+class Department extends Model
 {
     use HasFactory;
 
     /**
-     * Fields protected from mass assignment.
+     * Fields allowed for mass assignment.
      *
      * @var array
      */
@@ -20,20 +21,18 @@ class Student extends Model
     ];
 
     /**
-     * A student is associated to an academic session.
-     *
      * @return BelongsTo
      */
-    public function session(): BelongsTo
+    public function faculty(): BelongsTo
     {
-        return $this->belongsTo(Session::class);
+        return $this->belongsTo(Faculty::class);
     }
 
     /**
-     * @return BelongsTo
+     * @return HasMany
      */
-    public function department(): BelongsTo
+    public function students(): HasMany
     {
-        return $this->belongsTo(Department::class);
+        return $this->hasMany(Student::class);
     }
 }

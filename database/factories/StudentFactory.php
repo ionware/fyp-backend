@@ -31,6 +31,7 @@ class StudentFactory extends Factory
             'address' => $this->faker->address,
             'phone' => $this->faker->phoneNumber,
             'session_id' => 1,  // assume first session.
+            'department_id' => 1,   // assume first department.
         ];
     }
 }
