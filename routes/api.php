@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ApiKeyController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\StatController;
@@ -23,6 +25,12 @@ Route::prefix('v1')->group(function () {
 
         // Session resource
         Route::apiResource('session', SessionController::class);
+
+        // Faculty resource
+        Route::apiResource('faculty', FacultyController::class);
+
+        // Department resource.
+        Route::apiResource('department', DepartmentController::class);
 
         // Student resources
         Route::apiResource('student', StudentController::class);
