@@ -37,11 +37,12 @@ class SessionFactory extends Factory
             foreach ($departments as $departmentId) {
                 $year = substr(explode('/', $session->year)[0], 2);
                 $marker = strtoupper(substr(str_shuffle(Str::random(4)), 0, 2));
+                $digit = mt_rand(27, 67);
 
                 for ($i = 1; $i < 8; $i++) {
                     // Create student account.
                     $session->students()->create(Student::factory()->make([
-                        'matricNo' => sprintf('%s/47%s/%s', $year, $marker, str_pad($i, 3, STR_PAD_LEFT, '0')),
+                        'matricNo' => sprintf('%s/%s%s/%s', $year, $digit, $marker, str_pad($i, 3, STR_PAD_LEFT, '0')),
                         'department_id' => $departmentId,
                     ])->toArray());
                 }

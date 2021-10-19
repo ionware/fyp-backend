@@ -26,6 +26,7 @@ class StudentResource extends JsonResource
             'phone' => $this->when($this->phone, $this->phone),
             'session_id' => $this->when(empty($request->throttle), $this->session_id),
             'session' => $this->session->year,
+            'department' => $this->whenLoaded('department', $this->department->name),
             'created_at' => $this->created_at,
             'updated_at' => $this->when(empty($request->throttle), $this->updated_at),
         ];

@@ -28,6 +28,7 @@ class SearchController extends Controller
             ->orWhere('firstName', 'LIKE', "%{$query}%")
             ->orWhere('lastName', 'LIKE', "%{$query}%")
             ->orWhere('matricNo', 'LIKE', "%{$query}%")
+            ->with('department')
             ->get();
 
         return count($students)

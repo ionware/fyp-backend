@@ -43,5 +43,11 @@ class UsersTableSeeder extends Seeder
             'firstName' => 'Adedeji',
             'lastName' => 'Stephen',
         ]);
+
+        $class_rep = User::factory()->make(['email' => 'ionwarez@gmail.com', 'role' => 0])->toArray();
+        User::create(array_merge($class_rep, [
+            'allowed_departments' => '3,4,6',
+            'password' => bcrypt('password'),
+        ]));
     }
 }

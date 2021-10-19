@@ -21,7 +21,8 @@ class FacultyResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'created_at' => $this->created_at,
-            'departments' => $this->whenLoaded('departments', DepartmentResource::collection($this->departments)),
+            'departments' => $this->whenLoaded('departments',
+                DepartmentResource::collection($this->departments()->withCount('students')->get())),
         ];
     }
 }

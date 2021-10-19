@@ -19,7 +19,7 @@ class StudentController extends Controller
      */
     public function index(Request $request): Response
     {
-        $students =  Student::latest();
+        $students =  Student::with('department')->latest();
         if ($request->query('session')) {
             $students = $students->where('session_id', $request->query('session'));
         } else {
@@ -39,7 +39,7 @@ class StudentController extends Controller
      */
     public function all(): JsonResponse
     {
-        $students =  Student::latest()->get();
+        $students =  Student::with('department')->latest()->get();
 
         return response()->json(['data' => StudentResource::collection($students)], Response::HTTP_OK);
     }
@@ -59,6 +59,7 @@ class StudentController extends Controller
             'email' => 'required|unique:students',
             'matricNo' => 'required|unique:students',
             'gender' => '',
+            'department_id' => 'required|exists:departments,id',
             'session_id' => 'required|exists:sessions,id',
             'address' => '',
             'phone' => '',
@@ -77,7 +78,7 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        $student = Student::findOrFail($id);
+        $student = Student::with('department')->findOrFail($id);
 
         return response()->json(['data' => new StudentResource($student)], Response::HTTP_OK);
     }
@@ -103,7 +104,7 @@ class StudentController extends Controller
             'phone' => '',
         ]);
 
-        $student = Student::findOrFail($id);
+        $student = Student::with('department')->findOrFail($id);
         $data = array_filter($data, fn ($field) => !!$field);
         $student->update($data);
 
@@ -118,7 +119,7 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        $student = Student::findOrFail($id);
+        $student = Student::with('department')->findOrFail($id);
         $student->delete();
 
         return response()->json(['data' => new StudentResource($student)], Response::HTTP_OK);
